@@ -1,0 +1,14 @@
+version: "3.9"
+services:
+  app:
+    build: .
+    container_name: receipts_streamlit
+    restart: on-failure
+    environment:
+      STREAMLIT_SERVER_ENABLECORS: "false"
+      STREAMLIT_BROWSER_GATHERUSAGESTATS: "false"
+    volumes:
+      - ./data:/app/data                   # DB
+      - ./.streamlit:/app/.streamlit:ro    # auth.yaml, config.toml
+    ports:
+      - "127.0.0.1:8501:8501"
